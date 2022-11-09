@@ -1,4 +1,4 @@
-import sys, os, User
+import sys, os, User, Validation
 from heapq import heapify, heappop, heappush
 from Data import Vertices
 
@@ -87,8 +87,9 @@ def displaydijkstra(src,dest,totaldistance):
 
 def bookRide(src,dest,totaldistance):
     ticketnum = getNumLines("Tickets.txt")
-    name = input("Enter your name: ").upper()
-    number = str(input("Enter your number: "))
+    name = Validation.nameValidation()
+    #number = str(input("Enter your number: "))
+    number = Validation.phoneValidation()
     distanceConvert = float(totaldistance)
     rideFare = distanceConvert*3.25 #3.25 pesos per km
     format_rideFare = '{0:.2f}'.format(rideFare)
