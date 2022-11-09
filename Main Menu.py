@@ -27,15 +27,15 @@ def Main():
             print("Find the shortest path\n")
             source = "SAN PEDRO" #San Pedro
             destination = input("From: SAN PEDRO\nTo: ").upper()
-            totaldistance = Operations.dijkstra(Laguna,source,destination)
-            Operations.displaydijkstra(source,destination,totaldistance)
+            totaldistance,shortest_path= Operations.dijkstra(Laguna,source,destination)
+            Operations.displaydijkstra(source,destination,totaldistance,shortest_path)
         if choice == "3":
             os.system('cls')
             print("Book a ride\n")
             source = "SAN PEDRO"
             destination = input("From: SAN PEDRO\nTo: ").upper()
-            totaldistance = Operations.dijkstra(Laguna,source,destination)
-            Operations.bookRide(source,destination,totaldistance)
+            totaldistance,shortest_path = Operations.dijkstra(Laguna,source,destination)
+            Operations.bookRide(source,destination,totaldistance,shortest_path)
         if choice == "4":
             Operations.displayTickets()
 

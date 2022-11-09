@@ -50,6 +50,7 @@ def dijkstra(graph,src,dest):
     visited=[]
     temp=src
     shortest_path = [src]
+    shortest_path_string = []
     for i in range(29):
         if temp not in visited:
             visited.append(temp)
@@ -70,19 +71,24 @@ def dijkstra(graph,src,dest):
         else:
             for i in shortest_path:
                 if i != dest:
+                    shortest_path_string.append(i)
                     continue
                 else:
-                    #print(dest,end="")
+                    #shortest_path_string.append(dest)
                     break
 
             break
     totaldistance =  str(node_data[dest]['distance'])
-    return totaldistance
+    return totaldistance,shortest_path_string
 
-def displaydijkstra(src,dest,totaldistance):
+def displaydijkstra(src,dest,totaldistance,shortestpath):
     print("From: {} To: {}\n".format(src,dest))
     print("Shortest Distance: {}km".format(totaldistance))
     print("Shortest Path: ",end="")
+    counter = 0
+    for i in shortestpath:
+        print(i,"-> ",end='')
+    print(dest)
 
     pressKey = input("\nPress key to continue...")
 
@@ -90,7 +96,6 @@ def displaydijkstra(src,dest,totaldistance):
 def bookRide(src,dest,totaldistance):
     ticketnum = getNumLines("Tickets.txt")
     name = Validation.nameValidation()
-    #number = str(input("Enter your number: "))
     number = Validation.phoneValidation()
     distanceConvert = float(totaldistance)
     rideFare = distanceConvert*3.25 #3.25 pesos per km
