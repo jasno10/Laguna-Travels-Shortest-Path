@@ -1,7 +1,4 @@
-import os
-import User
-import sys
-import Operations
+import os, User, sys, Operations
 from Data import Vertices, Laguna
 
 
@@ -16,7 +13,7 @@ def Main():
         }
 
     choice = ""
-    name = User.fileExist()
+    User.fileExist()
 
     while choice != "5":
         os.system('cls')
@@ -33,10 +30,15 @@ def Main():
             print("Find the shortest path\n")
             source = "SAN PEDRO" #San Pedro
             destination = input("From: SAN PEDRO\nTo: ").upper()
-            Operations.dijkstra(Laguna,source,destination,name)
-
+            totaldistance = Operations.dijkstra(Laguna,source,destination)
+            Operations.displaydijkstra(source,destination,totaldistance)
+        if choice == "3":
+            source = "SAN PEDRO"
+            destination = input("From: SAN PEDRO\nTo: ").upper()
+            totaldistance = Operations.dijkstra(Laguna,source,destination)
+            Operations.bookRide(source,destination,totaldistance)
         if choice == "4":
-            Operations.displayTickets(name)
+            Operations.displayTickets()
 
 
 Main();

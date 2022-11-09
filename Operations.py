@@ -10,7 +10,7 @@ def displayCities(vertices):
 
     pressKey = input("\nPress key to continue...")
 
-def dijkstra(graph,src,dest,name):
+def dijkstra(graph,src,dest):
     os.system('cls')
     print('Find the shortest path\n')
     inf = sys.maxsize
@@ -77,24 +77,18 @@ def dijkstra(graph,src,dest,name):
                     break
 
             break
+    totaldistance =  str(node_data[dest]['distance'])
+    return totaldistance
 
-    print("Shortest Distance: " + str(node_data[dest]['distance'])+"km")
+def displaydijkstra(src,dest,totaldistance):
+    print("From: {} To: {}\n".format(src,dest))
+    print("Shortest Distance: {}km".format(totaldistance))
     print("Shortest Path: ",end="")
 
 
-    choice = input("\n\nDo you want to book a ride? [Y/N]: ")
-
-    if choice.upper() == "Y":
-        totaldistance =  str(node_data[dest]['distance'])
-        bookRide(totaldistance,src,dest,name)
-
-    if choice.upper() == "N":
-        main()
-
-
-def bookRide(distance,src,dest,name):
+def bookRide(src,dest,totaldistance):
     os.system('cls')
-    print("Book a ride\n\n")
+    print("Book a ride\n")
     ticketnum = getNumLines("Tickets.txt")
     name = input("Enter your name: ").upper()
     number = str(input("Enter your number: "))
@@ -102,20 +96,21 @@ def bookRide(distance,src,dest,name):
     rideFare = distanceConvert*3.25 #3.25 pesos per km
     format_rideFare = '{0:.2f}'.format(rideFare)
 
-    print("Ticket made")
-
     ticket = open("Tickets.txt","a")
     ticket.writelines("{}|{}|{}|{}|{}|{}|{}\n".format(ticketnum,name,number,src,dest,distance,format_rideFare))
     ticket.close()
 
+    presskey = input("Ticket succsefuly made\nPress any key to continue...")
+
 def displayTickets():
+    os.system('cls')
     with open(r"Tickets.txt",'r') as tickets:
-        print ("{:<15} {:<15} {:<15} {:<12} {:<13} {:<10} {:<10}".format("Ticket Number","Name","Phone Number","Origin","Destination","Distance","Fare"))
+        print ("{:<15} {:<15} {:<15} {:<12} {:<13} {:<10} {:<10}\n".format("Ticket Number","Name","Phone Number","Origin","Destination","Distance","Fare"))
         for line in tickets:
             data = line.strip().split('|')
-            if name == data[2]:
-                print ("{:<15} {:<15} {:<15} {:<12} {:<13} {:<10} {:<10}".format(data[0],data[1],data[2],data[3],data[4],data[5],data[6]))
+            print ("{:<15} {:<15} {:<15} {:<12} {:<13} {:<10} {:<10}".format(data[0],data[1],data[2],data[3],data[4],data[5],data[6]))
 
+    presskey = input("\nPress any key to continue...")
 
 def getNumLines(file):
     with open(r"{}".format(file), 'r') as file:
