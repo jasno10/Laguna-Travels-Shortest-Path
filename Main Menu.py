@@ -16,9 +16,10 @@ def Main():
         }
 
     choice = ""
+    name = User.fileExist()
+
     while choice != "5":
         os.system('cls')
-        User.fileExist()
         print("Welcome to San Pedro Travels!\n\nMain Menu\n")
         for key in mainMenu:
             print(key,'-',mainMenu[key])
@@ -32,10 +33,10 @@ def Main():
             print("Find the shortest path\n")
             source = "SAN PEDRO" #San Pedro
             destination = input("From: SAN PEDRO\nTo: ").upper()
-            Operations.dijkstra(Laguna,source,destination)
+            Operations.dijkstra(Laguna,source,destination,name)
 
         if choice == "4":
-            Operations.displayTickets()
+            Operations.displayTickets(name)
 
 
 Main();

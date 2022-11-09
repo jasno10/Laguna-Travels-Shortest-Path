@@ -10,7 +10,7 @@ def displayCities(vertices):
 
     pressKey = input("\nPress key to continue...")
 
-def dijkstra(graph,src,dest):
+def dijkstra(graph,src,dest,name):
     os.system('cls')
     print('Find the shortest path\n')
     inf = sys.maxsize
@@ -86,17 +86,15 @@ def dijkstra(graph,src,dest):
 
     if choice.upper() == "Y":
         totaldistance =  str(node_data[dest]['distance'])
-        bookRide(totaldistance,src,dest)
+        bookRide(totaldistance,src,dest,name)
 
     if choice.upper() == "N":
         main()
 
 
-def bookRide(distance,src,dest):
+def bookRide(distance,src,dest,name):
     os.system('cls')
-
     print("Book a ride\n\n")
-
     ticketnum = getNumLines("Tickets.txt")
     name = input("Enter your name: ").upper()
     number = str(input("Enter your number: "))
@@ -112,20 +110,19 @@ def bookRide(distance,src,dest):
 
 def displayTickets():
     with open(r"Tickets.txt",'r') as tickets:
-        print ("{:<8} {:<15} {:<10} {:<10} {:<13} {:<10} {:<10}".format("Number","Name","Number","Origin","Destination","Distance","Fare"))
+        print ("{:<15} {:<15} {:<15} {:<12} {:<13} {:<10} {:<10}".format("Ticket Number","Name","Phone Number","Origin","Destination","Distance","Fare"))
         for line in tickets:
             data = line.strip().split('|')
-            print ("{:<8} {:<15} {:<10} {:<10} {:<13} {:<10} {:<10}".format(data[0],data[1],data[2],data[3],data[4],data[5],data[6]))
+            if name == data[2]:
+                print ("{:<15} {:<15} {:<15} {:<12} {:<13} {:<10} {:<10}".format(data[0],data[1],data[2],data[3],data[4],data[5],data[6]))
 
 
 def getNumLines(file):
     with open(r"{}".format(file), 'r') as file:
         number = len(file.readlines())
 
-    if number == 0:
-        number = number+1
+    number = number+1
 
-    print(number)
     number = "{0:03}".format(number)
     return number
     
