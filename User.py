@@ -8,8 +8,9 @@ def loginUser():
     with open(r"Users.txt",'r') as users:
         for line in users:
             data = line.strip().split('|')
-            print (data[1],data[2])
             if username == data[1] and password == data[2]:
+                name = data[3]
+                return name
                 continue
             else:
                 presskey = input("\nIncorrect login informatin, press any key to try again...")
@@ -18,10 +19,10 @@ def loginUser():
 def createUser():
     os.system('cls')
     print("Create a new user")
-    userNum = Operations.getNumLines("Users.txt")                               #user number
-    username = input("Enter new username: ").upper()                            #user name
-    name = input("Enter full name: ").upper()                                   #full name
-    password = input("Enter password: ").upper()                                #password
+    userNum = Operations.getNumLines("Users.txt")
+    username = input("Enter new username: ").upper()
+    name = input("Enter full name: ").upper()
+    password = input("Enter password: ").upper()
 
     user = open("Users.txt","a")
     user.writelines("{}|{}|{}|{}\n".format(userNum,username,password,name))

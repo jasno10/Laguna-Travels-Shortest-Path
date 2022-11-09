@@ -90,14 +90,14 @@ def bookRide(src,dest,totaldistance):
     os.system('cls')
     print("Book a ride\n")
     ticketnum = getNumLines("Tickets.txt")
-    name = input("Enter your name: ").upper()
+    #name = input("Enter your name: ").upper()
     number = str(input("Enter your number: "))
-    distanceConvert = float(distance)
+    distanceConvert = float(totaldistance)
     rideFare = distanceConvert*3.25 #3.25 pesos per km
     format_rideFare = '{0:.2f}'.format(rideFare)
 
     ticket = open("Tickets.txt","a")
-    ticket.writelines("{}|{}|{}|{}|{}|{}|{}\n".format(ticketnum,name,number,src,dest,distance,format_rideFare))
+    ticket.writelines("{}|{}|{}|{}|{}|{}|{}\n".format(ticketnum,name,number,src,dest,totaldistance,format_rideFare))
     ticket.close()
 
     presskey = input("Ticket succsefuly made\nPress any key to continue...")
@@ -120,5 +120,12 @@ def getNumLines(file):
 
     number = "{0:03}".format(number)
     return number
+
+def getUserName(file):
+    with open(r"{}".format(file), 'r') as file:
+        for line in file:
+            data = line.strip().split('|')
+            name = data[3]
+    return name
     
     

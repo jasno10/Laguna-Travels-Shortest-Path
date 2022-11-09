@@ -14,7 +14,6 @@ def Main():
 
     choice = ""
     User.fileExist()
-
     while choice != "5":
         os.system('cls')
         print("Welcome to San Pedro Travels!\n\nMain Menu\n")
@@ -24,7 +23,6 @@ def Main():
 
         if choice == "1":
             Operations.displayCities(Vertices)
-
         if choice == "2":
             os.system('cls')
             print("Find the shortest path\n")
@@ -41,5 +39,5 @@ def Main():
             Operations.displayTickets()
 
 
-Main();
+Main()
 
