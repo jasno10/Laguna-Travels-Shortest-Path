@@ -84,6 +84,8 @@ def displaydijkstra(src,dest,totaldistance):
     print("Shortest Distance: {}km".format(totaldistance))
     print("Shortest Path: ",end="")
 
+    pressKey = input("\nPress key to continue...")
+
 
 def bookRide(src,dest,totaldistance):
     ticketnum = getNumLines("Tickets.txt")
@@ -98,7 +100,7 @@ def bookRide(src,dest,totaldistance):
     ticket.writelines("{}|{}|{}|{}|{}|{}|{}\n".format(ticketnum,name,number,src,dest,totaldistance,format_rideFare))
     ticket.close()
 
-    presskey = input("Ticket succsefuly made\nPress any key to continue...")
+    presskey = input("\nTicket succsefuly made\n\nPress any key to continue...")
 
 def displayTickets():
     os.system('cls')

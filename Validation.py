@@ -5,7 +5,7 @@ def nameValidation():
         if name == "":
             print("Please enter a valid name")
         else:
-            return name
+            return name.upper()
 
 def phoneValidation():
     number = ""
