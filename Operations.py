@@ -74,7 +74,6 @@ def dijkstra(graph,src,dest):
                     shortest_path_string.append(i)
                     continue
                 else:
-                    #shortest_path_string.append(dest)
                     break
 
             break
