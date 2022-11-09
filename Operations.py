@@ -1,4 +1,4 @@
-import sys, os
+import sys, os, User
 from heapq import heapify, heappop, heappush
 from Data import Vertices
 
@@ -12,7 +12,6 @@ def displayCities(vertices):
 
 def dijkstra(graph,src,dest):
     os.system('cls')
-    print('Find the shortest path\n')
     inf = sys.maxsize
     node_data = {
         'SAN PEDRO':{'distance':inf,'pred':[]},
@@ -87,10 +86,8 @@ def displaydijkstra(src,dest,totaldistance):
 
 
 def bookRide(src,dest,totaldistance):
-    os.system('cls')
-    print("Book a ride\n")
     ticketnum = getNumLines("Tickets.txt")
-    #name = input("Enter your name: ").upper()
+    name = input("Enter your name: ").upper()
     number = str(input("Enter your number: "))
     distanceConvert = float(totaldistance)
     rideFare = distanceConvert*3.25 #3.25 pesos per km

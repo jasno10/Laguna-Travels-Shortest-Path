@@ -13,7 +13,6 @@ def Main():
         }
 
     choice = ""
-    User.fileExist()
     while choice != "5":
         os.system('cls')
         print("Welcome to San Pedro Travels!\n\nMain Menu\n")
@@ -31,6 +30,8 @@ def Main():
             totaldistance = Operations.dijkstra(Laguna,source,destination)
             Operations.displaydijkstra(source,destination,totaldistance)
         if choice == "3":
+            os.system('cls')
+            print("Book a ride\n")
             source = "SAN PEDRO"
             destination = input("From: SAN PEDRO\nTo: ").upper()
             totaldistance = Operations.dijkstra(Laguna,source,destination)
