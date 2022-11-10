@@ -79,10 +79,10 @@ def bookRide(src,dest,totaldistance):
 def displayTickets():
     os.system('cls')
     with open(r"Tickets.txt",'r') as tickets:
-        print ("{:<15} {:<15} {:<15} {:<12} {:<13} {:<10} {:<10}\n".format("Ticket Number","Name","Phone Number","Origin","Destination","Distance","Fare"))
+        print ("{:<15} {:<15} {:<15} {:<12} {:<13} {:<9}  {:<10}\n".format("Ticket Number","Name","Phone Number","Origin","Destination","Distance","Fare"))
         for line in tickets:
             data = line.strip().split('|')
-            print ("{:<15} {:<15} {:<15} {:<12} {:<13} {:<10} {:<10}".format(data[0],data[1],data[2],data[3],data[4],data[5],data[6]))
+            print ("{:<15} {:<15} {:<15} {:<12} {:<13} {:<10} ₱{:<10}".format(data[0],data[1],data[2],data[3],data[4],data[5],data[6]))
 
     presskey = input("\nPress any key to continue...")
 
