@@ -15,7 +15,7 @@ def Main():
     choice = ""
     while choice != "5":
         os.system('cls')
-        print("Welcome to San Pedro Travels!\n\nMain Menu\n")
+        print("Welcome to Laguna Travels!\n\nMain Menu\n")
         for key in mainMenu:
             print(key,'-',mainMenu[key])
         choice = input("\nEnter your choice: ")
@@ -25,8 +25,8 @@ def Main():
         if choice == "2":
             os.system('cls')
             print("Find the shortest path\n")
-            source = "SAN PEDRO" #San Pedro
-            destination = input("From: SAN PEDRO\nTo: ").upper()
+            source = input("From: ").upper()
+            destination = input("To: ").upper()
             totaldistance, shortest_path= Operations.dijkstra(Laguna,source,destination)
             #print(totaldistance,"km")
             #print(shortest_path)
@@ -34,10 +34,10 @@ def Main():
         if choice == "3":
             os.system('cls')
             print("Book a ride\n")
-            source = "SAN PEDRO"
-            destination = input("From: SAN PEDRO\nTo: ").upper()
+            source = input("From: ").upper()
+            destination = input("To: ").upper()
             totaldistance,shortest_path = Operations.dijkstra(Laguna,source,destination)
-            Operations.bookRide(source,destination,totaldistance,shortest_path)
+            Operations.bookRide(source,destination,totaldistance)
         if choice == "4":
             Operations.displayTickets()
 

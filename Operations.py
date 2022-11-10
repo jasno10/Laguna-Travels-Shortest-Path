@@ -48,15 +48,18 @@ def dijkstra(graph, initial, end):
 
     path = path[::-1]
 
-    #print(weight)
-    #print(path)
     return weight, path
 
 def displaydijkstra(weight,path):
+    os.system('cls')
+    print("Find the shortest path\n")
+    #weight = "{:.2f}".format(weight)
     print("{}{}km".format("Shortest Distance: ",weight))
     print("Shortest Path: ",end='')
     for i in path:
         print(i,"",end='')
+
+    presskey = input("\n\nPress any key to continue...")
 
 
 
