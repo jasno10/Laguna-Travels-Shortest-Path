@@ -26,16 +26,12 @@
     <Compile Include="Data.py">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="User.py">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="Operations.py" />
     <Compile Include="Validation.py">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Dijkstra.txt" />
     <Content Include="Tickets.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />
