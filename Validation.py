@@ -4,7 +4,7 @@ def cityValidation(message):
     os.system('cls')
     city = ""
     while city == "":
-        city = input(message)
+        city = input(message).upper()
         if city not in Vertices:
             presskey = input("Please enter a valid city, press any key to try again...")
             cityValidation(message)
