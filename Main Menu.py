@@ -1,4 +1,4 @@
-import os, User, sys, Operations, Validation
+import os, sys, Operations, Validation
 from Data import Vertices, Laguna
 
 
@@ -9,11 +9,12 @@ def Main():
         2:"Find the shortest path to a city",
         3:"Book a ride",
         4:"Display tickets",
-        5:"Exit",
+        5:"Ticket sales report",
+        6:"Exit",
         }
 
     choice = ""
-    while choice != "5":
+    while choice != "6":
         os.system('cls')
         print("Welcome to Laguna Travels!\n\nMain Menu\n")
         for key in mainMenu:
@@ -40,6 +41,8 @@ def Main():
             Operations.bookRide(source,destination,totaldistance)
         if choice == "4":
             Operations.displayTickets()
+        if choice == "5":
+            Operations.ticketReports()
 
 
 Main()

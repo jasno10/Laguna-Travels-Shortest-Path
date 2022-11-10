@@ -1,4 +1,4 @@
-import sys, os, User, Validation
+import sys, os, Validation
 from Data import Vertices
 
 def displayCities(vertices):
@@ -85,6 +85,25 @@ def displayTickets():
             print ("{:<15} {:<15} {:<15} {:<12} {:<13} {:<10} {:<10}".format(data[0],data[1],data[2],data[3],data[4],data[5],data[6]))
 
     presskey = input("\nPress any key to continue...")
+
+def ticketReports():
+    os.system('cls')
+    print("Ticket Sales Report\n")
+
+    file = open("Tickets.txt",'r')
+    lines = file.readlines()
+
+    totalTicketSold = len(lines)
+    totalTicketRevenue = 0
+    for i in Vertices:
+        for line in lines:
+            data = line.split('|')
+            if i == data[3]:
+                totalTicketRevenue = float(data[6])+ totalTicketRevenue
+    print("Total tickets sold: {}\nTotal ticket sales: ₱{:.2f}".format(totalTicketSold,totalTicketRevenue))
+    
+    presskey = input("\nPress any key to continue...")
+
 
 def getNumLines(file):
     with open(r"{}".format(file), 'r') as file:
