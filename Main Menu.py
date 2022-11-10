@@ -1,4 +1,4 @@
-import os, User, sys, Operations
+import os, User, sys, Operations, Validation
 from Data import Vertices, Laguna
 
 
@@ -25,8 +25,8 @@ def Main():
         if choice == "2":
             os.system('cls')
             print("Find the shortest path\n")
-            source = input("From: ").upper()
-            destination = input("To: ").upper()
+            source = Validation.cityValidation("From: ")
+            destination = Validation.cityValidation("To: ")
             totaldistance, shortest_path= Operations.dijkstra(Laguna,source,destination)
             #print(totaldistance,"km")
             #print(shortest_path)
@@ -34,8 +34,8 @@ def Main():
         if choice == "3":
             os.system('cls')
             print("Book a ride\n")
-            source = input("From: ").upper()
-            destination = input("To: ").upper()
+            source = Validation.cityValidation("From: ")
+            destination = Validation.cityValidation("To: ")
             totaldistance,shortest_path = Operations.dijkstra(Laguna,source,destination)
             Operations.bookRide(source,destination,totaldistance)
         if choice == "4":

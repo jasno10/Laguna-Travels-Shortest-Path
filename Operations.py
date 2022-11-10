@@ -1,5 +1,4 @@
 import sys, os, User, Validation
-from heapq import heapify, heappop, heappush
 from Data import Vertices
 
 def displayCities(vertices):
