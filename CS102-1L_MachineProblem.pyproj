@@ -35,6 +35,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Dijkstra.txt" />
     <Content Include="Tickets.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />

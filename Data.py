@@ -1,39 +1,62 @@
+from collections import defaultdict
+
 Vertices =("SAN PEDRO","BINAN","STA ROSA","CABUYAO","CALAMBA","LOS BANOS","BAY","ALAMINOS","CALAUAN","SAN PABLO",
             "RIZAL","VICTORIA","NAGCARLAN","PILA","LILIW","STA CRUZ","MAGDALENA","MAJAYJAY","PAGSANJAN","LUISIANA",
             "LUMBAN","CAVINTI","KALAYAAN","PAETE","PAKIL","PANGIL","SINILOAN","FAMY","MABITAC","STA MARIA")
 
-Laguna = {
-    'SAN PEDRO':{'BINAN':10},
-    'BINAN':{'SAN PEDRO':10,'STA ROSA':11.5},
-    'STA ROSA':{'BINAN':11.5,'CABUYAO':10.4},
-    'CABUYAO':{'STA ROSA':10.4,'CALAMBA':12.6},
-    'CALAMBA':{'CABUYAO':12.6,'LOS BANOS':13.2},
-    'LOS BANOS':{'CALAMBA':13.2,'BAY':7.8,'CALAUAN':11.8,'VICTORIA':16.8},
-    'BAY':{'LOS BANOS':7.8,'SAN PABLO': 18.8,'ALAMINOS':23.3},
-    'ALAMINOS':{'BAY':23.3},
-    'ALAMINOS':{'BAY':23.3},
-    'CALAUAN':{'LOS BANOS': 11.8,'SAN PABLO': 11.7,'NAGCARLAN':15,'RIZAL':25.8},
-    'SAN PABLO':{'CALAUAN':11.7,'BAY':18.8},
-    'RIZAL':{'CALAUAN': 25.8 },
-    'VICTORIA':{'LOS BANOS': 16.8, 'CALAUAN': 13, 'PILA': 6.6},
-    'NAGCARLAN':{'CALAUAN': 15},
-    'PILA':{'VICTORIA': 6.6 , 'LILIW': 18.2, 'STA CRUZ': 6.7},
-    'LILIW':{'PILA': 18.2 , 'MAGDALENA': 9.1 },
-    'STA CRUZ':{'PILA': 6.7 ,'MAGDALENA': 10.5},
-    'MAGDALENA':{'LILIW': 9.1, 'STA CRUZ': 10.5, 'MAJAYJAY': 10.9, 'PAGSANJAN': 11.3},
-    'MAJAYJAY':{'MAGDALENA': 10.9, 'LUISIANA': 23.3},
-    'PAGSANJAN':{'MAGDALENA': 11.3, 'LUISIANA': 20, 'LUMBAN': 11.8, 'CAVINTI': 16},
-    'LUISIANA':{'MAJAYJAY': 23.3, 'PAGSANJAN': 20},
-    'LUMBAN': {'PAGSANJAN':11.8, 'KALAYAAN':22.6},
-    'CAVINTI': {'PAGSANJAN':16},
-    'KALAYAAN': {'LUMBAN':11.8, 'PAETE':9.3},
-    'PAETE': {'KALAYAAN':9.3, 'PAKIL':21.1},
-    'PAKIL': {'PAETE':21.1, 'PANGIL':9.6},
-    'PANGIL': {'SINILOAN':10, 'MABITAC':17.5, 'FAMY':16.5},
-    'SINILOAN': {'PANGIL':10, 'STA MARIA':20.7},
-    'FAMY': {'STA MARIA':18.9, 'PANGIL':16.5 },
-    'MABITAC': {'PANGIL':17.5, 'STA MARIA':13.6},
-    'STA MARIA': {'MABITAC':13.6, 'FAMY':18.9, 'SINILOAN':20.7},
-    }
+class Graph():
+    def __init__(self):
+
+        self.edges = defaultdict(list)
+        self.weights = {}
+    
+    def add_edge(self, from_node, to_node, weight):
+        # Note: assumes edges are bi-directional
+        self.edges[from_node].append(to_node)
+        self.edges[to_node].append(from_node)
+        self.weights[(from_node, to_node)] = weight
+        self.weights[(to_node, from_node)] = weight
+
+Laguna = Graph()
+
+edges = [
+    ("SAN PEDRO", "BINAN", 10),
+    ("BINAN", "STA ROSA", 11.5),
+    ("STA ROSA", "CABUYAO", 10.4),
+    ("CABUYAO", "CALAMBA", 12.6),
+    ("CALAMBA","LOS BANOS", 13.2),
+    ("LOS BANOS","BAY",7.8),
+    ("LOS BANOS","CALAUAN",11.8),
+    ("LOS BANOS","VICTORIA",16.8),
+    ("BAY","SAN PABLO",18.8),
+    ("BAY","ALAMINOS",23.3),
+    ("CALAUAN","NAGCARLAN",15),
+    ("CALAUAN","RIZAL",25.8),
+    ("CALAUAN","VICTORIA",13),
+    ("VICTORIA","PILA",6.6),
+    ("PILA","LILIW",18.2),
+    ("PILA","STA CRUZ",6.7),
+    ("STA CRUZ","MAGDALENA",10.5),
+    ("LILIW","MAGDALENA",9.1),
+    ("MAGDALENA","MAJAYJAY",130.9),
+    ("MAJAYJAY","LUISIANA",23),
+    ("LUISIANA","PAGSANJAN",20),
+    ("PAGSANJAN","CAVINTI",16),
+    ("PAGSANJAN","LUMBAN",11.8),
+    ("LUMBAN","KALAYAAN",22.6),
+    ("KALAYAAN","PAETE",9.3),
+    ("PAETE","PAKIL",21.1),
+    ("PAKIL","PANGIL",9.6),
+    ("PANGIL","MABITAC",17.5),
+    ("PANGIL","SINILOAN",10),
+    ("PANGIL","FAMY",16.5),
+    ("SINILOAN","STA MARIA", 20.7),
+    ("MABITAC","STA MARIA",13.6),
+    ("STA MARIA","FAMY",18.9)
+
+    ]
+
+for edge in edges:
+    Laguna.add_edge(*edge)
 
 

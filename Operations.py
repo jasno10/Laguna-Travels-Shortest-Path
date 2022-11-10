@@ -10,86 +10,54 @@ def displayCities(vertices):
 
     pressKey = input("\nPress key to continue...")
 
-def dijkstra(graph,src,dest):
-    os.system('cls')
-    inf = sys.maxsize
-    node_data = {
-        'SAN PEDRO':{'distance':inf,'pred':[]},
-        'BINAN':{'distance':inf,'pred':[]},
-        'STA ROSA':{'distance':inf,'pred':[]},
-        'CABUYAO':{'distance':inf,'pred':[]},
-        'CALAMBA':{'distance':inf,'pred':[]},
-        'LOS BANOS':{'distance':inf,'pred':[]},
-        'BAY':{'distance':inf,'pred':[]},
-        'ALAMINOS':{'distance':inf,'pred':[]},
-        'CALAUAN':{'distance':inf,'pred':[]},
-        'SAN PABLO':{'distance':inf,'pred':[]},
-        'RIZAL':{'distance':inf,'pred':[]},
-        'VICTORIA':{'distance':inf,'pred':[]},
-        'NAGCARLAN':{'distance':inf,'pred':[]},
-        'PILA':{'distance':inf,'pred':[]},
-        'LILIW':{'distance':inf,'pred':[]},
-        'STA CRUZ':{'distance':inf,'pred':[]},
-        'MAGDALENA':{'distance':inf,'pred':[]},
-        'MAJAYJAY':{'distance':inf,'pred':[]},
-        'PAGSANJAN':{'distance':inf,'pred':[]},
-        'LUISIANA':{'distance':inf,'pred':[]},
-        'LUMBAN':{'distance':inf,'pred':[]},
-        'CAVINTI':{'distance':inf,'pred':[]},
-        'KALAYAAN':{'distance':inf,'pred':[]},
-        'PAETE':{'distance':inf,'pred':[]},
-        'PAKIL':{'distance':inf,'pred':[]},
-        'PANGIL':{'distance':inf,'pred':[]},
-        'SINILOAN':{'distance':inf,'pred':[]},
-        'FAMY':{'distance':inf,'pred':[]},
-        'MABITAC':{'distance':inf,'pred':[]},
-        'STA MARIA':{'distance':inf,'pred':[]},
-        }
+def dijkstra(graph, initial, end):
 
-    node_data[src]['distance'] = 0
-    visited=[]
-    temp=src
-    shortest_path = [src]
-    shortest_path_string = []
-    for i in range(29):
-        if temp not in visited:
-            visited.append(temp)
-            min_heap=[]
-            for j in graph[temp]:
-                if j not in visited:
-                    distance = node_data[temp]['distance'] + graph[temp][j]
-                    if distance < node_data[j]['distance']:
-                        node_data[j]['distance'] = distance
-                        node_data[j]['pred'] = node_data[temp]['pred'] + [temp]
-                        shortest_path.append(j)
-                    heappush(min_heap,(node_data[j]['distance'], j))
-        heapify(min_heap)
+    shortest_paths = {initial: (None, 0)}
+    current_node = initial
+    visited = set()
+    
+    while current_node != end:
+        visited.add(current_node)
+        destinations = graph.edges[current_node]
+        weight_to_current_node = shortest_paths[current_node][1]
 
-        #Check dead ends, 
-        if min_heap:
-            temp = min_heap[0][1]
-        else:
-            for i in shortest_path:
-                if i != dest:
-                    shortest_path_string.append(i)
-                    continue
-                else:
-                    break
+        for next_node in destinations:
+            weight = graph.weights[(current_node, next_node)] + weight_to_current_node
+            if next_node not in shortest_paths:
+                shortest_paths[next_node] = (current_node, weight)
+            else:
+                current_shortest_weight = shortest_paths[next_node][1]
+                if current_shortest_weight > weight:
+                    shortest_paths[next_node] = (current_node, weight)
+        
+        
+        next_destinations = {node: shortest_paths[node] for node in shortest_paths if node not in visited}
+        if not next_destinations:
+            return "Route Not Possible"
 
-            break
-    totaldistance =  str(node_data[dest]['distance'])
-    return totaldistance,shortest_path_string
+        current_node = min(next_destinations, key=lambda k: next_destinations[k][1])
+        
+    
+    
 
-def displaydijkstra(src,dest,totaldistance,shortestpath):
-    print("From: {} To: {}\n".format(src,dest))
-    print("Shortest Distance: {}km".format(totaldistance))
-    print("Shortest Path: ",end="")
-    counter = 0
-    for i in shortestpath:
-        print(i,"-> ",end='')
-    print(dest)
+    path = []
+    while current_node is not None:
+        path.append(current_node)
+        next_node = shortest_paths[current_node][0]
+        current_node = next_node
 
-    pressKey = input("\nPress key to continue...")
+    path = path[::-1]
+
+    #print(weight)
+    #print(path)
+    return weight, path
+
+def displaydijkstra(weight,path):
+    print("{}{}km".format("Shortest Distance: ",weight))
+    print("Shortest Path: ",end='')
+    for i in path:
+        print(i,"",end='')
+
 
 
 def bookRide(src,dest,totaldistance):
