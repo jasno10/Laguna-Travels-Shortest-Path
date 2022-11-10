@@ -33,3 +33,9 @@ def phoneValidation():
         else:
             return number
 
+def ticketCheck(ticketLen):
+    if ticketLen == 0:
+        return False
+    else:
+        return True
+

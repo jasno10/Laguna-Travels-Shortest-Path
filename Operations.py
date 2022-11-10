@@ -78,13 +78,21 @@ def bookRide(src,dest,totaldistance):
 
 def displayTickets():
     os.system('cls')
-    with open(r"Tickets.txt",'r') as tickets:
-        print ("{:<15} {:<15} {:<15} {:<12} {:<13} {:<9}  {:<10}\n".format("Ticket Number","Name","Phone Number","Origin","Destination","Distance","Fare"))
-        for line in tickets:
-            data = line.strip().split('|')
-            print ("{:<15} {:<15} {:<15} {:<12} {:<13} {:<10} ₱{:<10}".format(data[0],data[1],data[2],data[3],data[4],data[5],data[6]))
+    file = open("Tickets.txt",'r')
+    lines = file.readlines()
+    totalTicketSold = len(lines)
+    ticketCheck = Validation.ticketCheck(totalTicketSold)
+    if ticketCheck == True:
+        with file:
+            print ("{:<15} {:<15} {:<15} {:<12} {:<13} {:<9}  {:<10}\n".format("Ticket Number","Name","Phone Number","Origin","Destination","Distance","Fare"))
+            for line in tickets:
+                data = line.strip().split('|')
+                print ("{:<15} {:<15} {:<15} {:<12} {:<13} {:<10} ₱{:<10}".format(data[0],data[1],data[2],data[3],data[4],data[5],data[6]))
 
-    presskey = input("\nPress any key to continue...")
+        presskey = input("\nPress any key to continue...")
+    else:
+        presskey = input("No tickets sold, please book a ticket.\n\nPress any key to continue...")
+        
 
 def ticketReports():
     os.system('cls')
@@ -92,17 +100,20 @@ def ticketReports():
 
     file = open("Tickets.txt",'r')
     lines = file.readlines()
-
     totalTicketSold = len(lines)
+    ticketCheck = Validation.ticketCheck(totalTicketSold)
     totalTicketRevenue = 0
-    for i in Vertices:
-        for line in lines:
-            data = line.split('|')
-            if i == data[3]:
-                totalTicketRevenue = float(data[6])+ totalTicketRevenue
-    print("Total tickets sold: {}\nTotal ticket sales: ₱{:.2f}".format(totalTicketSold,totalTicketRevenue))
+    if ticketCheck == True:
+        for i in Vertices:
+            for line in lines:
+                data = line.split('|')
+                if i == data[3]:
+                    totalTicketRevenue = float(data[6])+ totalTicketRevenue
+        print("Total tickets sold: {}\nTotal ticket sales: ₱{:.2f}".format(totalTicketSold,totalTicketRevenue))
     
-    presskey = input("\nPress any key to continue...")
+        presskey = input("\nPress any key to continue...")
+    else:
+        presskey = input("No tickets sold, please book a ticket.\n\nPress any key to continue...")
 
 
 def getNumLines(file):
